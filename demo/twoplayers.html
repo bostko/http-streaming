@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <link href="https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 50px;
+        color: #868688;
+        background-color: #FAFCFF;
+      }
+      nav {
+        background-color: #e7e7e7
+      }
+      nav a {
+        color: #868688;
+      }
+      nav a:hover {
+        color: #606062;
+        text-decoration: none;
+      }
+      .navbar-toggle .icon-bar {
+        background-color: #868688;
+      }
+      .starter-template {
+        padding: 40px 15px;
+        text-align: center;
+      }
+      .video-js {
+        margin: 0 auto;
+      }
+      input {
+        margin-top: 15px;
+        min-width: 450px;
+        padding: 5px;
+      }
+    </style>
+
+	</head>
+	<body>
+    <div class="container">
+      <section class="starter-template">
+        <h3>VideoJS HTTP Streaming</h3>
+        <p class="lead">
+          <a href="https://github.com/videojs/http-streaming">videojs-http-streaming</a>
+          lets you use a single format and deliver adaptive streaming
+          video to all major desktop and mobile browsers.
+        </p>
+
+        <video-js id="example-video" class="vjs-default-skin" width=960 height=400 controls>
+          <source
+            src="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8"
+            type="application/x-mpegURL">
+        </video-js>
+
+        <form id=load-url>
+          <div>
+            <label>
+              Video URL:
+              <input id=url type=url value="https://d2zihajmogu5jn.cloudfront.net/bipbop-advanced/bipbop_16x9_variant.m3u8">
+            </label>
+          </div>
+
+          <div>
+            <label>
+              MimeType:
+              <select id=mimetype>
+                <option selected>application/x-mpegURL</option>
+                <option>application/dash+xml</option>
+              </select>
+            </label>
+          </div>
+
+          <div>
+            <button type=submit>Load</button>
+          </div>
+        </form>
+
+      </section>
+      <h2>PLAYER2</h2>
+
+      <section class="starter-template">
+        <h3>2VideoJS HTTP Streaming</h3>
+        <p class="lead">
+          <a href="https://github.com/videojs/http-streaming">videojs-http-streaming</a>
+          lets you use a single format and deliver adaptive streaming
+          video to all major desktop and mobile browsers.
+        </p>
+
+        <video-js id="example2" class="vjs-default-skin" width=960 height=400 controls>
+          <source
+            src="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8"
+            type="application/x-mpegURL">
+        </video-js>
+
+        <form id=load2>
+          <div>
+            <label>
+              Video URL:
+              <input id=url2 type=url value="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8">
+            </label>
+          </div>
+
+          <div>
+            <label>
+              MimeType:
+              <select id=mimetype2>
+                <option selected>application/x-mpegURL</option>
+                <option>application/dash+xml</option>
+              </select>
+            </label>
+          </div>
+
+          <div>
+            <button type=submit>Load</button>
+          </div>
+        </form>
+
+      </section>
+    </div>
+
+    <script src="https://unpkg.com/video.js/dist/video.js"></script>
+    <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
+
+    <!--
+      Now, initialize your player. That's it!
+      -->
+    <script>
+      (function(window, videojs) {
+        var player = window.player = videojs('example-video');
+
+        // hook up the video switcher
+        var loadUrl = document.getElementById('load-url');
+        var url = document.getElementById('url');
+        var mimeType = document.getElementById('mimetype');
+        loadUrl.addEventListener('submit', function(event) {
+          event.preventDefault();
+          player.src({
+            src: url.value,
+            type: mimeType.options[mimeType.selectedIndex].innerText
+          });
+          return false;
+        });
+      }(window, window.videojs));
+      (function(window, videojs) {
+        var player = window.player2 = videojs('example2');
+
+        // hook up the video switcher
+        var loadUrl = document.getElementById('load2');
+        var url = document.getElementById('url2');
+        var mimeType = document.getElementById('mimetype2');
+        loadUrl.addEventListener('submit', function(event) {
+          event.preventDefault();
+          player.src({
+            src: url.value,
+            type: mimeType.options[mimeType.selectedIndex].innerText
+          });
+          return false;
+        });
+      }(window, window.videojs));
+    </script>
+	</body>
+</html>
